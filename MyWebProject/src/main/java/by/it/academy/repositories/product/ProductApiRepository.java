@@ -2,7 +2,6 @@ package by.it.academy.repositories.product;
 
 import by.it.academy.entities.product.Product;
 import by.it.academy.repositories.databases.DatabaseProduct;
-import by.it.academy.repositories.databases.Database_emulation;
 
 import java.util.List;
 
@@ -22,8 +21,6 @@ public class ProductApiRepository implements ProductRepository<Product> {
     public List<Product> getProductsFromDatabase() {
         final DatabaseProduct databaseProduct = new DatabaseProduct();
         return databaseProduct.getProducts();
-//        final Database_emulation database_emulation = new Database_emulation();
-//        return database_emulation.getProducts();
     }
 
     @Override

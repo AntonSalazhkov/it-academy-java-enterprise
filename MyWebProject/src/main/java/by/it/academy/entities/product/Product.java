@@ -3,15 +3,10 @@ package by.it.academy.entities.product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-//@Entity
 @Data
 @AllArgsConstructor
 public class Product {
 
- //   @Id
     int id;
     String imagePath;
     String name;

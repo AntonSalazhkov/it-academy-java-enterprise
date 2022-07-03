@@ -1,13 +1,10 @@
 package by.it.academy.services.product;
 
 import by.it.academy.entities.product.Product;
-import by.it.academy.entities.purchase.Purchase;
 import by.it.academy.repositories.product.ProductRepository;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.*;
-import java.util.function.UnaryOperator;
-import java.util.stream.Collectors;
 
 public class ProductApiService implements ProductService<Product> {
     private final ProductRepository<Product> repository;
@@ -67,27 +64,6 @@ public class ProductApiService implements ProductService<Product> {
     public void updateProducts(String[] productIds, String[] productQuantity) {
         int i = 0;
         int minimumPossibleNumber = 0;
-
-//        Map<String[], String[]> map = new HashMap<>();
-//        map.put(productIds, productQuantity);
-
-        Purchase purchase = new Purchase(productIds[0], productQuantity[0]);
-
-
-        //UnaryOperator<List<Purchase>> unaryOperator = list -> list.subList(0,0);
-
-
-        List<Purchase> list = new ArrayList<>();
-        //list.add(purchase);
-
-//         list
-//                .stream()
-//                .collect(Collectors.toMap( key -> 1, (a,b) -> a + 1));
-
-
-
-
-
 
         for (String productId : productIds) {
             if (NumberUtils.isNumber(productQuantity[i]) && Integer.parseInt(productQuantity[i]) > minimumPossibleNumber) {
