@@ -14,7 +14,6 @@ import java.util.UUID;
 @Table(name = "USERS_5")
 @Data
 @Builder
-@EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
@@ -22,6 +21,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+
     private String login;
     private String email;
     private String password;

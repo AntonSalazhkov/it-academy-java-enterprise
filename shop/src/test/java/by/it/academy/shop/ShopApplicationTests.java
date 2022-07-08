@@ -80,16 +80,11 @@ class ShopApplicationTests {
                         ProductColour.GREEN, "Good denim coat 20222", "X, XL", 15, 10),
                 5, localDate);
 
-        Purchase pu3 = new Purchase(new User(uuid, "anton", "asdf@gmail.com", "123234asdfg", UserType.USER),
-                new Product(uuid, "img/product10.jpg", "coat", ProductCategory.MEN, ProductType.COAT,
-                        ProductColour.GREEN, "Good denim coat 2021", "XL", 10, 5),
-                4);
-
         Assertions.assertNull(pu1.getId());
         Assertions.assertNull(pu1.getUser());
         Assertions.assertNull(pu1.getProduct());
         Assertions.assertEquals(0, pu1.getProductQuantity());
-        Assertions.assertNull(pu1.getLocalDate());
+        Assertions.assertEquals(localDate, pu1.getLocalDate());
 
         Assertions.assertEquals(uuid, pu2.getId());
         Assertions.assertEquals(new User(uuid, "sergei", "asd@gmail.com", "123234asdf", UserType.USER), pu2.getUser());
@@ -97,9 +92,6 @@ class ShopApplicationTests {
                 ProductColour.GREEN, "Good denim coat 20222", "X, XL", 15, 10), pu2.getProduct());
         Assertions.assertEquals(5, pu2.getProductQuantity());
         Assertions.assertEquals(localDate, pu2.getLocalDate());
-
-        Assertions.assertNull(pu3.getId());
-        Assertions.assertEquals(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm")), pu3.getLocalDate());
     }
 }
 

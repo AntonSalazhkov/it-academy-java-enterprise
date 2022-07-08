@@ -5,15 +5,17 @@ package by.it.academy.shop.constants;
  */
 
 public class Messages {
+    public static final String PRODUCTS_NOT_FOUND = "No products found for your search.";
+
+    public static final String INCORRECT_REQUEST_ENTITY_NOT_FOUND = "Incorrect request. Entity not found.";
+
+    public static final String INCORRECT_REQUEST_INVALID_FORMAT = "Incorrect request. Invalid Format.";
 
     public static final String INCORRECT_AUTHORIZATION = "Incorrect username or password.";
 
-    public static final String INCORRECT_REGISTRATION = "Incorrectly entered data. " +
-            "<br>Login: a-z, A-Z, 0-9, length from 2 to 15 characters. " +
-            "<br>Email: a-z, A-Z, 0-9 + \"@\" + domain. " +
-            "<br>Password: a-z, A-Z, 0-9, length more 8 characters.";
-
     public static final String INCORRECT_UNIQUE_LOGIN = "This login already exists.";
 
-    public static final String INCORRECT_QUANTITY_PRODUCTS = "Incorrect quantity.";
+    public static final String TEXT_EMAIL_MESSAGE = "Thanks for registering on our website.";
+
+    public static final String SUBJECT_EMAIL_MESSAGE = "Registration on the website.";
 }

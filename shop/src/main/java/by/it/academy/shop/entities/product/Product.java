@@ -4,8 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -28,7 +30,7 @@ public class Product {
     @Column(name = "IMAGE_PATH")
     private String imagePath;
 
-    @Column(name = "PRODUCTS_NAME")
+    @Column(name = "PRODUCT_NAME")
     private String name;
 
     @Column(name = "CATEGORY_ID")
@@ -53,18 +55,4 @@ public class Product {
 
     @Column(name = "IN_STOCK")
     private int inStock;
-
-    // AddProductController, no id
-    public Product(String imagePath, String name, ProductCategory productCategory, ProductType productType,
-                   ProductColour productColour, String productDetails, String sizeClothes, int price, int inStock) {
-        this.imagePath = imagePath;
-        this.name = name;
-        this.productCategory = productCategory;
-        this.productType = productType;
-        this.productColour = productColour;
-        this.productDetails = productDetails;
-        this.sizeClothes = sizeClothes;
-        this.price = price;
-        this.inStock = inStock;
-    }
 }

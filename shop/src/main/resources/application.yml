@@ -11,3 +11,8 @@ spring:
     username: sys as sysdba
     password: 1234
     driver-class-name: oracle.jdbc.driver.OracleDriver
+
+services:
+  mail:
+    email: test871150@mail.ru
+    password: X5eU281MFhjua008X6iN

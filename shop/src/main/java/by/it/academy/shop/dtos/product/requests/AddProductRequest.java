@@ -8,6 +8,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+/**
+ * Обработка запроса по добавлению продукта.
+ * Присутствует валидация по полям.
+ */
 
 @Data
 @NoArgsConstructor
@@ -20,13 +27,13 @@ public class AddProductRequest {
     @NotBlank
     private String name;
 
-    @NotBlank
+    @NotNull
     private ProductCategory productCategory;
 
-    @NotBlank
+    @NotNull
     private ProductType productType;
 
-    @NotBlank
+    @NotNull
     private ProductColour productColour;
 
     @NotBlank
@@ -35,9 +42,9 @@ public class AddProductRequest {
     @NotBlank
     private String sizeClothes;
 
-    @NotBlank
-    private int price;
+    @Pattern(regexp = "\\d+")
+    private String price;
 
-    @NotBlank
-    private int inStock;
+    @Pattern(regexp = "\\d+")
+    private String inStock;
 }

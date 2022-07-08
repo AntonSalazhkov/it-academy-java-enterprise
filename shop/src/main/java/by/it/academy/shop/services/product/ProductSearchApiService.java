@@ -1,13 +1,12 @@
 package by.it.academy.shop.services.product;
 
-import by.it.academy.shop.dtos.product.requests.ShowDetailsRequest;
 import by.it.academy.shop.dtos.product.requests.ShowProductRequest;
 import by.it.academy.shop.entities.product.Product;
+import by.it.academy.shop.exception.businessExceptions.ProductsNotFoundException;
 import by.it.academy.shop.repositories.product.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Сервис поиска продуктов.
@@ -15,28 +14,19 @@ import java.util.Objects;
 
 public class ProductSearchApiService {
 
-    private Product product;
-    private List<Product> products;
-
-    public ProductSearchApiService(ProductRepository repository, ShowDetailsRequest showDetailsRequest) {
-        this.product = productSearchById(repository, showDetailsRequest);
-    }
+    private final List<Product> products;
 
     public ProductSearchApiService(ProductRepository repository, ShowProductRequest showProductRequests) {
         this.products = productsSearch(repository, showProductRequests);
     }
 
     /**
-     * Получить сохраненный продукт
-     */
-    public Product getProduct() {
-        return product;
-    }
-
-    /**
      * Получить список сохраненных продуктов.
      */
     public List<Product> getProducts() {
+        if (products.isEmpty()) {
+            throw new ProductsNotFoundException();
+        }
         return products;
     }
 
@@ -50,34 +40,36 @@ public class ProductSearchApiService {
         List<Product> currentProducts = repository.findAll();
         List<Product> sortedProduct = new ArrayList<>();
 
-        if (Objects.nonNull(showProductRequests.getProductCategories())) {
-
-            showProductRequests.getProductCategories().stream()
+        if (!showProductRequests.getProductCategories().isEmpty()) {
+            showProductRequests.getProductCategories()
                     .forEach(selectedParameter -> sortedProduct.addAll(repository.getByProductCategory(selectedParameter)));
 
             currentProducts.retainAll(sortedProduct);
+            sortedProduct.clear();
         }
 
-        if (Objects.nonNull(showProductRequests.getProductTypes())) {
-            showProductRequests.getProductTypes().stream()
+        if (!showProductRequests.getProductTypes().isEmpty()) {
+            showProductRequests.getProductTypes()
                     .forEach(selectedParameter -> sortedProduct.addAll(repository.getByProductType(selectedParameter)));
 
             currentProducts.retainAll(sortedProduct);
+            sortedProduct.clear();
         }
 
-        if (Objects.nonNull(showProductRequests.getProductColours())) {
-            showProductRequests.getProductColours().stream()
+        if (!showProductRequests.getProductColours().isEmpty()) {
+            showProductRequests.getProductColours()
                     .forEach(selectedParameter -> sortedProduct.addAll(repository.getByProductColour(selectedParameter)));
 
             currentProducts.retainAll(sortedProduct);
+            sortedProduct.clear();
+        }
+
+        if (!showProductRequests.getUserInputProductName().isEmpty()) {
+            sortedProduct.addAll(repository.getByNameContainingIgnoreCase(showProductRequests.getUserInputProductName()));
+
+            currentProducts.retainAll(sortedProduct);
+            sortedProduct.clear();
         }
         return currentProducts;
-    }
-
-    /**
-     * Получить продукт по Id
-     */
-    private Product productSearchById(ProductRepository repository, ShowDetailsRequest showDetailsRequest) {
-        return repository.getById(showDetailsRequest.getId());
     }
 }

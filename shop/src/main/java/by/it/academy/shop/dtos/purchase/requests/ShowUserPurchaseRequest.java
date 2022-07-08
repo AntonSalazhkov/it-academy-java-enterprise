@@ -1,4 +1,4 @@
-package by.it.academy.shop.dtos.product.requests;
+package by.it.academy.shop.dtos.purchase.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,15 +8,15 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
- * Обработка запроса на просмотр деталей продукта.
+ * Обработка запроса по отображению покупок конкретного пользователя.
  * Присутствует валидация по полю.
  */
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShowDetailsRequest {
+public class ShowUserPurchaseRequest {
 
     @NotNull
-    private UUID id;
+    private UUID userId;
 }

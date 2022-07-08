@@ -1,6 +1,8 @@
 package by.it.academy.shop.services.user;
 
 import by.it.academy.shop.entities.user.User;
+import by.it.academy.shop.exception.businessExceptions.AuthorizationUserException;
+import by.it.academy.shop.exception.businessExceptions.UniqueLoginUserException;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.List;
@@ -24,11 +26,7 @@ public class UserAuthenticationService {
                 .filter(user -> BCrypt.checkpw(password, user.getPassword()))
                 .findFirst();
 
-        if (userOptional.isPresent()) {
-            return userOptional.get();
-        } else {
-            return null;
-        }
+        return userOptional.orElseThrow(AuthorizationUserException::new);
     }
 
     /**
@@ -48,7 +46,7 @@ public class UserAuthenticationService {
 
             return new User(login.toLowerCase(), email, BCrypt.hashpw(password, BCrypt.gensalt()), userType);
         } else {
-            return null;
+            throw new UniqueLoginUserException();
         }
     }
 }

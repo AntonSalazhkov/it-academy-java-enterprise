@@ -8,8 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 /**
@@ -42,11 +40,6 @@ public class Purchase {
     private int productQuantity;
 
     @Column(name = "LOCAL_DATE")
-    private String localDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+    private String localDate;
 
-    public Purchase(User user, Product product, int productQuantity) {
-        this.user = user;
-        this.product = product;
-        this.productQuantity = productQuantity;
-    }
 }

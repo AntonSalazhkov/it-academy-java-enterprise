@@ -9,7 +9,9 @@ import by.it.academy.shop.repositories.product.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.*;
 
 /**
@@ -23,27 +25,26 @@ public class ProductApiService implements ProductService {
 
     private final ProductRepository productRepository;
 
+    @Transactional
     @Override
-    public Product addProduct(AddProductRequest request) {
-        final Product product = buildUser(request);
+    public Product addProduct(AddProductRequest addProductRequest) {
+        final Product product = buildProduct(addProductRequest);
         return productRepository.save(product);
     }
 
     @Override
     public Product showProductById(ShowDetailsRequest showDetailsRequest) {
-        final ProductSearchApiService productSearch = new ProductSearchApiService(productRepository, showDetailsRequest);
-
-        return productSearch.getProduct();
+        return productRepository.findById(showDetailsRequest.getId()).orElseThrow(EntityNotFoundException::new);
     }
 
-    @Override
-    public List<Product> showProduct(ShowProductRequest request) {
-        final ProductSearchApiService productSearch = new ProductSearchApiService(productRepository, request);
 
+    @Override
+    public List<Product> showProduct(ShowProductRequest showProductRequest) {
+        final ProductSearchApiService productSearch = new ProductSearchApiService(productRepository, showProductRequest);
         return productSearch.getProducts();
     }
 
-    private Product buildUser(AddProductRequest request) {
+    private Product buildProduct(AddProductRequest request) {
         return Product.builder()
                 .imagePath(request.getImagePath())
                 .name(request.getName())
@@ -52,8 +53,8 @@ public class ProductApiService implements ProductService {
                 .productColour(request.getProductColour())
                 .productDetails(request.getProductDetails())
                 .sizeClothes(request.getSizeClothes())
-                .price(request.getPrice())
-                .inStock(request.getInStock())
+                .price(Integer.parseInt(request.getPrice()))
+                .inStock(Integer.parseInt(request.getInStock()))
                 .build();
     }
 }

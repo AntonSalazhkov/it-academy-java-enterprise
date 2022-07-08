@@ -16,11 +16,6 @@ import java.util.UUID;
 
 public interface ProductRepository extends JpaRepository<Product, UUID> {
     /**
-     * Получение продукта из базы данных по Id.
-     */
-    Product getById(UUID id);
-
-    /**
      * Получение списка продуктов из базы данных по категории.
      */
     List<Product> getByProductCategory(ProductCategory productCategory);
@@ -34,4 +29,9 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
      * Получение списка продуктов из базы данных по цвету.
      */
     List<Product> getByProductColour(ProductColour productColour);
+
+    /**
+     * Поиск продукта в базе данных по введенному пользователем запросу.
+     */
+    List<Product> getByNameContainingIgnoreCase(String userInputProductName);
 }

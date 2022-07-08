@@ -12,9 +12,8 @@ import java.util.List;
  */
 
 public interface ProductService {
-
     /**
-     * Добавление продукта
+     * Добавление нового продукта
      */
     Product addProduct(AddProductRequest addProductRequests);
 

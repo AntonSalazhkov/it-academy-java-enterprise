@@ -7,6 +7,7 @@ import by.it.academy.shop.repositories.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Реализация сервиса обработки пользователя.
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 public class UserApiService implements UserService {
     private final UserRepository userRepository;
 
+    @Transactional
     @Override
     public User addUser(RegistrationUserRequest request) {
         UserAuthenticationService userAuthenticationService = new UserAuthenticationService();
@@ -26,6 +28,7 @@ public class UserApiService implements UserService {
         return userRepository.save(user);
     }
 
+    @Transactional
     @Override
     public User authorizationUser(AuthorizationUserRequest request) {
         UserAuthenticationService userAuthenticationService = new UserAuthenticationService();

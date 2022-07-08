@@ -9,7 +9,6 @@ import by.it.academy.shop.entities.user.User;
  */
 
 public interface UserService {
-
     /**
      * Добавление нового пользователя
      */

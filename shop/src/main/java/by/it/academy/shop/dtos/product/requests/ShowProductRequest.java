@@ -7,20 +7,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
 import java.util.List;
+
+/**
+ * Обработка запроса по отображению продуктов.
+ * В поступающем запросе могут быть или не быть устанавливаемые пользователем параметры.
+ */
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ShowProductRequest {
 
-    @NotBlank
     private List<ProductCategory> productCategories;
-
-    @NotBlank
     private List<ProductType> productTypes;
-
-    @NotBlank
     private List<ProductColour> productColours;
+    private String userInputProductName;
 }
