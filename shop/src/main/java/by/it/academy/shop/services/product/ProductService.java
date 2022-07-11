@@ -1,8 +1,9 @@
 package by.it.academy.shop.services.product;
 
 import by.it.academy.shop.dtos.product.requests.AddProductRequest;
-import by.it.academy.shop.dtos.product.requests.ShowDetailsRequest;
+import by.it.academy.shop.dtos.product.requests.IdProductRequest;
 import by.it.academy.shop.dtos.product.requests.ShowProductRequest;
+import by.it.academy.shop.dtos.product.requests.UpdateProductRequest;
 import by.it.academy.shop.entities.product.Product;
 
 import java.util.List;
@@ -25,5 +26,15 @@ public interface ProductService {
     /**
      * Нахождение продукта по Id
      */
-    Product showProductById(ShowDetailsRequest showDetailsRequest);
+    Product showProductById(IdProductRequest idProductRequest);
+
+    /**
+     * Обновление продукта
+     */
+    Product updateProduct(UpdateProductRequest updateProductRequest);
+
+    /**
+     * Удаление продукта по Id
+     */
+    boolean clearStockProduct(IdProductRequest idProductRequest);
 }

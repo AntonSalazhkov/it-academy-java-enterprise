@@ -5,6 +5,7 @@ import by.it.academy.shop.entities.product.ProductCategory;
 import by.it.academy.shop.entities.product.ProductColour;
 import by.it.academy.shop.entities.product.ProductType;
 import by.it.academy.shop.entities.purchase.Purchase;
+import by.it.academy.shop.entities.purchase.PurchaseStatus;
 import by.it.academy.shop.entities.user.User;
 import by.it.academy.shop.entities.user.UserType;
 import org.junit.jupiter.api.Assertions;
@@ -78,13 +79,14 @@ class ShopApplicationTests {
         Purchase pu2 = new Purchase(uuid, new User(uuid, "sergei", "asd@gmail.com", "123234asdf", UserType.USER),
                 new Product(uuid, "img/product9.jpg", "coat", ProductCategory.MEN, ProductType.COAT,
                         ProductColour.GREEN, "Good denim coat 20222", "X, XL", 15, 10),
-                5, localDate);
+                5, localDate, PurchaseStatus.BOUGHT);
 
         Assertions.assertNull(pu1.getId());
         Assertions.assertNull(pu1.getUser());
         Assertions.assertNull(pu1.getProduct());
         Assertions.assertEquals(0, pu1.getProductQuantity());
-        Assertions.assertEquals(localDate, pu1.getLocalDate());
+        Assertions.assertNull(pu1.getLocalDate());
+        Assertions.assertNull(pu1.getPurchaseStatus());
 
         Assertions.assertEquals(uuid, pu2.getId());
         Assertions.assertEquals(new User(uuid, "sergei", "asd@gmail.com", "123234asdf", UserType.USER), pu2.getUser());
@@ -92,6 +94,7 @@ class ShopApplicationTests {
                 ProductColour.GREEN, "Good denim coat 20222", "X, XL", 15, 10), pu2.getProduct());
         Assertions.assertEquals(5, pu2.getProductQuantity());
         Assertions.assertEquals(localDate, pu2.getLocalDate());
+        Assertions.assertEquals(PurchaseStatus.BOUGHT, pu2.getPurchaseStatus());
     }
 }
 

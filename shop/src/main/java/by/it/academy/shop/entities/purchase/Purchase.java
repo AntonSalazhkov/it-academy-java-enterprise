@@ -42,4 +42,7 @@ public class Purchase {
     @Column(name = "LOCAL_DATE")
     private String localDate;
 
+    @Column(name = "PURCHASE_STATUS")
+    @Enumerated
+    private PurchaseStatus purchaseStatus;
 }

@@ -1,8 +1,9 @@
 package by.it.academy.shop.controllers.product;
 
 import by.it.academy.shop.dtos.product.requests.AddProductRequest;
-import by.it.academy.shop.dtos.product.requests.ShowDetailsRequest;
+import by.it.academy.shop.dtos.product.requests.IdProductRequest;
 import by.it.academy.shop.dtos.product.requests.ShowProductRequest;
+import by.it.academy.shop.dtos.product.requests.UpdateProductRequest;
 import by.it.academy.shop.entities.product.Product;
 import by.it.academy.shop.services.product.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -45,8 +46,8 @@ public class ProductController {
     @RequestMapping("/details-view")
     @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public Product showProductById(@RequestBody @Validated ShowDetailsRequest showDetailsRequest) {
-        return productService.showProductById(showDetailsRequest);
+    public Product showProductById(@RequestBody @Validated IdProductRequest idProductRequest) {
+        return productService.showProductById(idProductRequest);
     }
 
     @RequestMapping("/add-product")
@@ -54,5 +55,19 @@ public class ProductController {
     @ResponseStatus(HttpStatus.CREATED)
     public Product addProduct(@RequestBody @Validated AddProductRequest addProductRequest) {
         return productService.addProduct(addProductRequest);
+    }
+
+    @RequestMapping("/update-product")
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public Product updateProduct(@RequestBody @Validated UpdateProductRequest updateProductRequest) {
+        return productService.updateProduct(updateProductRequest);
+    }
+
+    @RequestMapping("/delete-product")
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public boolean deleteProduct(@RequestBody @Validated IdProductRequest idProductRequest) {
+        return productService.clearStockProduct(idProductRequest);
     }
 }

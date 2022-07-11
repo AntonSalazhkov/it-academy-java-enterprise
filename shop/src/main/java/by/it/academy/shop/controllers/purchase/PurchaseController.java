@@ -1,6 +1,7 @@
 package by.it.academy.shop.controllers.purchase;
 
 import by.it.academy.shop.dtos.purchase.requests.AddPurchaseRequest;
+import by.it.academy.shop.dtos.purchase.requests.IdPurchaseRequest;
 import by.it.academy.shop.dtos.purchase.requests.ShowUserPurchaseRequest;
 import by.it.academy.shop.entities.purchase.Purchase;
 import by.it.academy.shop.services.purchase.PurchaseService;
@@ -42,5 +43,12 @@ public class PurchaseController {
     @ResponseStatus(HttpStatus.CREATED)
     public List<Purchase> viewUserPurchase(@RequestBody ShowUserPurchaseRequest showUserPurchaseRequest) {
         return purchaseService.showUserPurchase(showUserPurchaseRequest);
+    }
+
+    @RequestMapping("/update-purchase")
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public boolean updatePurchase(@RequestBody IdPurchaseRequest idPurchaseRequest) {
+        return purchaseService.updatePurchase(idPurchaseRequest);
     }
 }

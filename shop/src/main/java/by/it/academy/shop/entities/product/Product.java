@@ -4,10 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -33,15 +31,15 @@ public class Product {
     @Column(name = "PRODUCT_NAME")
     private String name;
 
-    @Column(name = "CATEGORY_ID")
+    @Column(name = "PRODUCT_CATEGORY")
     @Enumerated
     private ProductCategory productCategory;
 
-    @Column(name = "TYPE_ID")
+    @Column(name = "PRODUCT_TYPE")
     @Enumerated
     private ProductType productType;
 
-    @Column(name = "COLOUR_ID")
+    @Column(name = "PRODUCT_COLOUR")
     @Enumerated
     private ProductColour productColour;
 

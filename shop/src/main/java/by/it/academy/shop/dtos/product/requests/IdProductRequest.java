@@ -8,14 +8,14 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
- * Обработка запроса на просмотр деталей продукта.
+ * Обработка запроса на Id продукта.
  * Присутствует валидация по полю.
  */
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShowDetailsRequest {
+public class IdProductRequest {
 
     @NotNull
     private UUID id;
