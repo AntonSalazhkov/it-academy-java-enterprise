@@ -1,22 +1,21 @@
-package by.it.academy.shop.dtos.product.requests;
+package by.it.academy.shop.dtos.mail.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import java.util.UUID;
 
 /**
- * Обработка запроса по Id продукта.
+ * Обработка ответа по отправке сообщения.
  * Присутствует валидация по полю.
  */
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class IdProductRequest {
+public class MailRequest {
 
     @NotNull
-    private UUID id;
+    private boolean messageDispatchStatus;
 }

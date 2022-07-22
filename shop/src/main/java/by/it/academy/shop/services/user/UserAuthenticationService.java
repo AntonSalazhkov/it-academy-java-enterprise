@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Сервис авторизации пользователя.
+ * Сервис аутентификации пользователя.
  */
 
 public class UserAuthenticationService {

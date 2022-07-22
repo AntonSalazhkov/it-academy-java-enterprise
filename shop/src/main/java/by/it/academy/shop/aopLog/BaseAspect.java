@@ -1,4 +1,4 @@
-package by.it.academy.shop.aop;
+package by.it.academy.shop.aopLog;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -9,6 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+/**
+ * Методы составления выводимых сообщений при логировании данных.
+ */
 
 @Slf4j
 public class BaseAspect {

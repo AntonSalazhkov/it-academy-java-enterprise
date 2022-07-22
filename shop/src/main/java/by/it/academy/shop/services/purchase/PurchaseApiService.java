@@ -52,7 +52,7 @@ public class PurchaseApiService implements PurchaseService {
 
     @Transactional
     @Override
-    public boolean updatePurchase(IdPurchaseRequest idPurchaseRequest) {
+    public boolean makePurchase(IdPurchaseRequest idPurchaseRequest) {
         Purchase purchase = purchaseRepository.findById(idPurchaseRequest.getId()).orElseThrow(EntityNotFoundException::new);
         int productQuantity = purchase.getProductQuantity();
 

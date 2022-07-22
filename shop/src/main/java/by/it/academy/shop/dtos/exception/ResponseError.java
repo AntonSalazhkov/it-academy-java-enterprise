@@ -5,8 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Сооставляемое сообщение для вывода на странице о выявленных некорректных ситуаций в работе программы.
+ */
+
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseError {

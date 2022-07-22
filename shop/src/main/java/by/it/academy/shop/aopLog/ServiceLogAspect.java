@@ -1,4 +1,4 @@
-package by.it.academy.shop.aop;
+package by.it.academy.shop.aopLog;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -10,15 +10,19 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+/**
+ * Сервис логирования данных.
+ */
+
 @Slf4j
 @Aspect
 @Component
 public class ServiceLogAspect extends BaseAspect {
-    @Pointcut("execution(* by.it.academy.shop.services..*(..)) && !@annotation(by.it.academy.shop.aop.ExcludeLog)")
+    @Pointcut("execution(* by.it.academy.shop.services..*(..)) && !@annotation(by.it.academy.shop.aopLog.ExcludeLog)")
     public void before() {
     }
 
-    @Pointcut("execution(* by.it.academy.shop.services..*(..)) && !@annotation(by.it.academy.shop.aop.ExcludeLog)")
+    @Pointcut("execution(* by.it.academy.shop.services..*(..)) && !@annotation(by.it.academy.shop.aopLog.ExcludeLog)")
     public void after() {
     }
 

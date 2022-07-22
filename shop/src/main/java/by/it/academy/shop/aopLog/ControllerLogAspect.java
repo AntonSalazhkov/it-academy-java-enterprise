@@ -1,4 +1,4 @@
-package by.it.academy.shop.aop;
+package by.it.academy.shop.aopLog;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -13,15 +13,19 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
+/**
+ * Контроллер обработки логирования данных.
+ */
+
 @Slf4j
 @Aspect
 @Component
 public class ControllerLogAspect extends BaseAspect {
-    @Pointcut("execution(* by.it.academy.shop.controllers..*(..)) && !@annotation(by.it.academy.shop.aop.ExcludeLog)")
+    @Pointcut("execution(* by.it.academy.shop.controllers..*(..)) && !@annotation(by.it.academy.shop.aopLog.ExcludeLog)")
     public void before() {
     }
 
-    @Pointcut("execution(* by.it.academy.shop.controllers..*(..)) && !@annotation(by.it.academy.shop.aop.ExcludeLog)")
+    @Pointcut("execution(* by.it.academy.shop.controllers..*(..)) && !@annotation(by.it.academy.shop.aopLog.ExcludeLog)")
     public void after() {
     }
 

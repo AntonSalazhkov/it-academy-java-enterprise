@@ -4,6 +4,8 @@ import by.it.academy.shop.dtos.user.requests.AuthorizationUserRequest;
 import by.it.academy.shop.dtos.user.requests.RegistrationUserRequest;
 import by.it.academy.shop.entities.user.User;
 
+import java.util.UUID;
+
 /**
  * Сервис обработки пользователя.
  */

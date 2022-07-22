@@ -7,6 +7,11 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
+/**
+ * Обработка запроса по Id покупки.
+ * Присутствует валидация по полю.
+ */
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

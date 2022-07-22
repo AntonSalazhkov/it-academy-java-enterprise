@@ -20,8 +20,13 @@ import java.util.List;
  * По результатам добавления вернет новую покупку или вернет null в случае не успешного добавления.
  * <p>
  * Метод viewUserPurchase прослушивает адресс /view-user-purchase, принимает поступающий "id" пользователя в виде UUID,
- * производит поиск совпадения в базе данных.
- * По результатам поиска вернет все имеющиеся у пользователя покупки или пустой список в случае не успешного поиска.
+ * производит поиск имеющихся покупок у пользователя в базе данных.
+ * По результатам поиска вернет все имеющиеся у пользователя покупки или сообщение о не нахождении у пользователя созданных покупок.
+ * <p>
+ * Метод makePurchase прослушивает адресс /make-purchase, принимает поступающий "id" покупки в виде UUID.
+ * По результатам обработки установит покупке статут "купленно" и спишет с остатка продуктов на складе указанное количество
+ * продуктов в покупке, при этом вернет true. В случае некорректных запросов вернет сообщение о не нахождении покупки или
+ * false в случае не успешной транзакции, или в случае если количества продуктов в покупке превышает количество продуктов на складе.
  */
 
 @Slf4j
@@ -45,10 +50,10 @@ public class PurchaseController {
         return purchaseService.showUserPurchase(showUserPurchaseRequest);
     }
 
-    @RequestMapping("/update-purchase")
+    @RequestMapping("/make-purchase")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public boolean updatePurchase(@RequestBody IdPurchaseRequest idPurchaseRequest) {
-        return purchaseService.updatePurchase(idPurchaseRequest);
+    public boolean makePurchase(@RequestBody IdPurchaseRequest idPurchaseRequest) {
+        return purchaseService.makePurchase(idPurchaseRequest);
     }
 }

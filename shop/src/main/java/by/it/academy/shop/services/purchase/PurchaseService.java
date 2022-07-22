@@ -24,7 +24,7 @@ public interface PurchaseService {
     List<Purchase> showUserPurchase(ShowUserPurchaseRequest showUserPurchaseRequest);
 
     /**
-     * Обновление покупки (списание продукта и установка нового статуса покупки)
+     * Совершение покупки (списание продукта и установка нового статуса покупки)
      */
-    boolean updatePurchase(IdPurchaseRequest idPurchaseRequest);
+    boolean makePurchase(IdPurchaseRequest idPurchaseRequest);
 }
