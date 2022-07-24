@@ -12,14 +12,14 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
- * Обработка запроса по добавлению продукта.
+ * Запрос по добавлению продукта.
  * Присутствует валидация по полям.
  */
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddProductRequest {
+public class CreateProductRequest {
 
     @NotBlank
     private String imagePath;
@@ -46,5 +46,5 @@ public class AddProductRequest {
     private String price;
 
     @Pattern(regexp = "\\d+")
-    private String inStock;
+    private String quantity;
 }

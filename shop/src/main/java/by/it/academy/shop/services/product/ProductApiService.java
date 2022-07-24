@@ -1,8 +1,8 @@
 package by.it.academy.shop.services.product;
 
-import by.it.academy.shop.dtos.product.requests.AddProductRequest;
-import by.it.academy.shop.dtos.product.requests.IdProductRequest;
-import by.it.academy.shop.dtos.product.requests.ShowProductRequest;
+import by.it.academy.shop.dtos.product.requests.CreateProductRequest;
+import by.it.academy.shop.dtos.product.requests.ProductRequest;
+import by.it.academy.shop.dtos.product.requests.ListProductRequest;
 import by.it.academy.shop.dtos.product.requests.UpdateProductRequest;
 import by.it.academy.shop.entities.product.Product;
 
@@ -28,18 +28,18 @@ public class ProductApiService implements ProductService {
 
     @Transactional
     @Override
-    public Product addProduct(AddProductRequest addProductRequest) {
+    public Product addProduct(CreateProductRequest addProductRequest) {
         final Product product = buildProduct(addProductRequest);
         return productRepository.save(product);
     }
 
     @Override
-    public Product showProductById(IdProductRequest idProductRequest) {
+    public Product showProductById(ProductRequest idProductRequest) {
         return productRepository.findById(idProductRequest.getId()).orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
-    public List<Product> showProduct(ShowProductRequest showProductRequest) {
+    public List<Product> showProduct(ListProductRequest showProductRequest) {
         final ProductSearchApiService productSearch = new ProductSearchApiService(productRepository, showProductRequest);
         return productSearch.getProducts();
     }
@@ -55,14 +55,14 @@ public class ProductApiService implements ProductService {
 
     @Transactional
     @Override
-    public boolean clearStockProduct(IdProductRequest idProductRequest) {
+    public boolean clearQuantityProduct(ProductRequest idProductRequest) {
         Product product = productRepository.findById(idProductRequest.getId()).orElseThrow(EntityNotFoundException::new);
-        product.setInStock(0);
+        product.setQuantity(0);
         productRepository.save(product);
         return true;
     }
 
-    private Product buildProduct(AddProductRequest request) {
+    private Product buildProduct(CreateProductRequest request) {
         return Product.builder()
                 .imagePath(request.getImagePath())
                 .name(request.getName())
@@ -72,7 +72,7 @@ public class ProductApiService implements ProductService {
                 .productDetails(request.getProductDetails())
                 .sizeClothes(request.getSizeClothes())
                 .price(Integer.parseInt(request.getPrice()))
-                .inStock(Integer.parseInt(request.getInStock()))
+                .quantity(Integer.parseInt(request.getQuantity()))
                 .build();
     }
 
@@ -87,7 +87,7 @@ public class ProductApiService implements ProductService {
                 .productDetails(request.getProductDetails())
                 .sizeClothes(request.getSizeClothes())
                 .price(Integer.parseInt(request.getPrice()))
-                .inStock(Integer.parseInt(request.getInStock()))
+                .quantity(Integer.parseInt(request.getQuantity()))
                 .build();
     }
 }

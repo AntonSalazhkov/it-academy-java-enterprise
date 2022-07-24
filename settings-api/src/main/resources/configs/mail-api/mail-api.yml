@@ -16,4 +16,4 @@ services:
   mail:
     email: test871150@mail.ru
     password: X5eU281MFhjua008X6iN
-    urlResponse: http://localhost:8080/dispatch-status
+    url: http://localhost:8080/mail

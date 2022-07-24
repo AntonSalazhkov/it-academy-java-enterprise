@@ -1,8 +1,8 @@
 package by.it.academy.shop.services.purchase;
 
-import by.it.academy.shop.dtos.purchase.requests.AddPurchaseRequest;
-import by.it.academy.shop.dtos.purchase.requests.IdPurchaseRequest;
-import by.it.academy.shop.dtos.purchase.requests.ShowUserPurchaseRequest;
+import by.it.academy.shop.dtos.purchase.requests.CreatePurchaseRequest;
+import by.it.academy.shop.dtos.purchase.requests.PurchaseRequest;
+import by.it.academy.shop.dtos.purchase.requests.UserPurchaseRequest;
 import by.it.academy.shop.entities.purchase.Purchase;
 
 import java.util.List;
@@ -16,15 +16,15 @@ public interface PurchaseService {
     /**
      * Добавление новой покупки
      */
-    Purchase addPurchase(AddPurchaseRequest addPurchaseRequest);
+    Purchase addPurchase(CreatePurchaseRequest addPurchaseRequest);
 
     /**
      * Просмотр покупки пользователем
      */
-    List<Purchase> showUserPurchase(ShowUserPurchaseRequest showUserPurchaseRequest);
+    List<Purchase> showUserPurchase(UserPurchaseRequest showUserPurchaseRequest);
 
     /**
      * Совершение покупки (списание продукта и установка нового статуса покупки)
      */
-    boolean makePurchase(IdPurchaseRequest idPurchaseRequest);
+    boolean makePurchase(PurchaseRequest idPurchaseRequest);
 }

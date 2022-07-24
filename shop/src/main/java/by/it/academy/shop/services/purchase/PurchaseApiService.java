@@ -1,8 +1,8 @@
 package by.it.academy.shop.services.purchase;
 
-import by.it.academy.shop.dtos.purchase.requests.AddPurchaseRequest;
-import by.it.academy.shop.dtos.purchase.requests.IdPurchaseRequest;
-import by.it.academy.shop.dtos.purchase.requests.ShowUserPurchaseRequest;
+import by.it.academy.shop.dtos.purchase.requests.CreatePurchaseRequest;
+import by.it.academy.shop.dtos.purchase.requests.PurchaseRequest;
+import by.it.academy.shop.dtos.purchase.requests.UserPurchaseRequest;
 import by.it.academy.shop.entities.product.Product;
 import by.it.academy.shop.entities.purchase.Purchase;
 import by.it.academy.shop.entities.purchase.PurchaseStatus;
@@ -34,13 +34,13 @@ public class PurchaseApiService implements PurchaseService {
 
     @Transactional
     @Override
-    public Purchase addPurchase(AddPurchaseRequest addPurchaseRequest) {
+    public Purchase addPurchase(CreatePurchaseRequest addPurchaseRequest) {
         Purchase purchase = buildPurchase(addPurchaseRequest);
         return purchaseRepository.save(purchase);
     }
 
     @Override
-    public List<Purchase> showUserPurchase(ShowUserPurchaseRequest showUserPurchaseRequest) {
+    public List<Purchase> showUserPurchase(UserPurchaseRequest showUserPurchaseRequest) {
         List<Purchase> purchases = purchaseRepository
                 .getByUserIdAndPurchaseStatus(showUserPurchaseRequest.getUserId(), PurchaseStatus.PROCESSING);
         if (!purchases.isEmpty()) {
@@ -52,24 +52,29 @@ public class PurchaseApiService implements PurchaseService {
 
     @Transactional
     @Override
-    public boolean makePurchase(IdPurchaseRequest idPurchaseRequest) {
+    public boolean makePurchase(PurchaseRequest idPurchaseRequest) {
         Purchase purchase = purchaseRepository.findById(idPurchaseRequest.getId()).orElseThrow(EntityNotFoundException::new);
         int productQuantity = purchase.getProductQuantity();
 
         Product product = productRepository.findById(purchase.getProduct().getId()).orElseThrow(EntityNotFoundException::new);
 
-        if (product.getInStock() < productQuantity || purchase.getPurchaseStatus().equals(PurchaseStatus.BOUGHT)) {
+        if (product.getQuantity() < productQuantity || purchase.getPurchaseStatus().equals(PurchaseStatus.BOUGHT)) {
             return false;
         } else {
-            product.setInStock(product.getInStock() - productQuantity);
-            purchase.setPurchaseStatus(PurchaseStatus.BOUGHT);
-            productRepository.save(product);
-            purchaseRepository.save(purchase);
+            purchaseProcessing(product, productQuantity, purchase);
             return true;
         }
     }
 
-    private Purchase buildPurchase(AddPurchaseRequest request) {
+    private void purchaseProcessing(Product product, int productQuantity, Purchase purchase) {
+
+        product.setQuantity(product.getQuantity() - productQuantity);
+        purchase.setPurchaseStatus(PurchaseStatus.BOUGHT);
+        productRepository.save(product);
+        purchaseRepository.save(purchase);
+    }
+
+    private Purchase buildPurchase(CreatePurchaseRequest request) {
         return Purchase.builder()
                 .user(userRepository.findById(request.getUserId()).orElseThrow(EntityNotFoundException::new))
                 .product(productRepository.findById(request.getProductId()).orElseThrow(EntityNotFoundException::new))

@@ -1,4 +1,4 @@
-package by.it.academy.shop.dtos.mail.responses;
+package by.it.academy.shop.dtos.mail.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +14,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MailResponse {
+public class CreateMailRequest {
 
     @NotBlank
     private String email;

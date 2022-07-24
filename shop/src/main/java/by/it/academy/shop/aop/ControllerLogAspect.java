@@ -1,4 +1,4 @@
-package by.it.academy.shop.aopLog;
+package by.it.academy.shop.aop;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -21,11 +21,11 @@ import java.util.Optional;
 @Aspect
 @Component
 public class ControllerLogAspect extends BaseAspect {
-    @Pointcut("execution(* by.it.academy.shop.controllers..*(..)) && !@annotation(by.it.academy.shop.aopLog.ExcludeLog)")
+    @Pointcut("execution(* by.it.academy.shop.controllers..*(..)) && !@annotation(by.it.academy.shop.aop.ExcludeLog)")
     public void before() {
     }
 
-    @Pointcut("execution(* by.it.academy.shop.controllers..*(..)) && !@annotation(by.it.academy.shop.aopLog.ExcludeLog)")
+    @Pointcut("execution(* by.it.academy.shop.controllers..*(..)) && !@annotation(by.it.academy.shop.aop.ExcludeLog)")
     public void after() {
     }
 

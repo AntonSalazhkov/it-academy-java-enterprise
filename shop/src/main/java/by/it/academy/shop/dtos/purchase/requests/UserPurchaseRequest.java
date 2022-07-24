@@ -8,15 +8,15 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
- * Обработка запроса по Id покупки.
+ * Запрос по отображению покупок конкретного пользователя.
  * Присутствует валидация по полю.
  */
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class IdPurchaseRequest {
+public class UserPurchaseRequest {
 
     @NotNull
-    private UUID id;
+    private UUID userId;
 }

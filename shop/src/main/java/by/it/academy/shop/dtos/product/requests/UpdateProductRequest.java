@@ -13,7 +13,7 @@ import javax.validation.constraints.Pattern;
 import java.util.UUID;
 
 /**
- * Обработка запроса по обнавлению продукта.
+ * Запрос по обнавлению продукта.
  * Присутствует валидация по полям.
  */
 
@@ -50,5 +50,5 @@ public class UpdateProductRequest {
     private String price;
 
     @Pattern(regexp = "\\d+")
-    private String inStock;
+    private String quantity;
 }

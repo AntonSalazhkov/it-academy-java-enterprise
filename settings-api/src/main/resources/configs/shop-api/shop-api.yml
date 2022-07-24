@@ -14,4 +14,4 @@ spring:
 
 services:
   mail-api:
-    url: http://localhost:8090/send-message
+    url: http://localhost:8090/mail

@@ -6,8 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
 /**
- * Методы соединения с базой данных.
- * Обработка сущности User.
+ * Методы обработки сущности User.
  */
 
 public interface UserRepository extends JpaRepository<User, UUID> {

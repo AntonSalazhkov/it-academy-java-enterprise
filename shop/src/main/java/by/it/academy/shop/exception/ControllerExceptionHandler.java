@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.persistence.EntityNotFoundException;
+import java.net.ConnectException;
 
 /**
  * Контроллер обработки исключений.
@@ -27,7 +28,7 @@ public class ControllerExceptionHandler {
     @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
     @ExceptionHandler(ProductsNotFoundException.class)
     public ResponseError handleProductsNotFoundException(ProductsNotFoundException e) {
-        log.info("Received exception by method \"handleProductsNotFoundException\"" + e.toString());
+        log.info("Received exception by method \"handleProductsNotFoundException\" " + e);
         return new ResponseError(Messages.PRODUCTS_NOT_FOUND, e.toString());
     }
 
@@ -37,7 +38,7 @@ public class ControllerExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseError handleEntityNotFoundException(EntityNotFoundException e) {
-        log.info("Received exception by method \"handleEntityNotFoundException\"" + e.toString());
+        log.info("Received exception by method \"handleEntityNotFoundException\" " + e);
         return new ResponseError(Messages.INCORRECT_REQUEST_ENTITY_NOT_FOUND, e.toString());
     }
 
@@ -47,7 +48,7 @@ public class ControllerExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(InvalidFormatException.class)
     public ResponseError handleIllegalArgumentException(InvalidFormatException e) {
-        log.info("Received exception by method \"handleIllegalArgumentException\"" + e.toString());
+        log.info("Received exception by method \"handleIllegalArgumentException\" " + e);
         return new ResponseError(Messages.INCORRECT_REQUEST_INVALID_FORMAT, e.toString());
     }
 
@@ -57,7 +58,7 @@ public class ControllerExceptionHandler {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(AuthorizationUserException.class)
     public ResponseError handleAuthorizationUserException(AuthorizationUserException e) {
-        log.info("Received exception by method \"handleAuthorizationUserException\"" + e.toString());
+        log.info("Received exception by method \"handleAuthorizationUserException\" " + e);
         return new ResponseError(Messages.INCORRECT_AUTHORIZATION, e.toString());
     }
 
@@ -67,7 +68,16 @@ public class ControllerExceptionHandler {
     @ResponseStatus(HttpStatus.CONFLICT)
     @ExceptionHandler(UniqueLoginUserException.class)
     public ResponseError handleUniqueLoginUserException(UniqueLoginUserException e) {
-        log.info("Received exception by method \"handleUniqueLoginUserException\"" + e.toString());
+        log.info("Received exception by method \"handleUniqueLoginUserException\" " + e);
         return new ResponseError(Messages.INCORRECT_UNIQUE_LOGIN, e.toString());
+    }
+
+    /**
+     * Обработка исключений соединений с внешними API.
+     */
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    @ExceptionHandler(ConnectException.class)
+    public void connectException(ConnectException e) {
+        log.info("Received exception by method \"connectException\" " + e);
     }
 }

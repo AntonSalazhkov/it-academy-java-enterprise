@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MailResponse {
 
-    private boolean messageDispatchStatus;
+    private boolean statusMail;
 }

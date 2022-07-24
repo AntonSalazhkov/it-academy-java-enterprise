@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 
 /**
- * Обработка запроса по авторизации пользователя.
+ * Запрос по авторизации пользователя.
  * Присутствует валидация по полям.
  */
 

@@ -1,4 +1,4 @@
-package by.it.academy.shop.dtos.product.requests;
+package by.it.academy.shop.dtos.purchase.requests;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,14 +8,14 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 /**
- * Обработка запроса по Id продукта.
+ * Запрос по Id покупки.
  * Присутствует валидация по полю.
  */
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class IdProductRequest {
+public class PurchaseRequest {
 
     @NotNull
     private UUID id;

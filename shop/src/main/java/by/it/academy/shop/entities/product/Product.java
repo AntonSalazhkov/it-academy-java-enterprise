@@ -14,7 +14,7 @@ import java.util.UUID;
  */
 
 @Entity
-@Table(name = "PRODUCTS_2")
+@Table(name = "products")
 @Data
 @Builder
 @NoArgsConstructor
@@ -50,7 +50,5 @@ public class Product {
     private String sizeClothes;
 
     private int price;
-
-    @Column(name = "IN_STOCK")
-    private int inStock;
+    private int quantity;
 }

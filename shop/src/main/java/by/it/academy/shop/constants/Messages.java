@@ -1,7 +1,7 @@
 package by.it.academy.shop.constants;
 
 /**
- * Текстовые сообщения для вывода на WEB-страницах
+ * Текстовые сообщения для вывода на WEB-страницах или пересылки сообщений
  */
 
 public class Messages {

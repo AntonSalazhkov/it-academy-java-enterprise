@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 
 /**
- * Обработка запроса по отправке сообщения.
+ * Запрос по отправке сообщения.
  * Присутствует валидация по полям.
  */
 

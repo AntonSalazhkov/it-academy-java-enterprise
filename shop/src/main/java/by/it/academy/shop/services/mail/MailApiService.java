@@ -1,8 +1,7 @@
 package by.it.academy.shop.services.mail;
 
-import by.it.academy.shop.dtos.mail.responses.MailResponse;
+import by.it.academy.shop.dtos.mail.requests.CreateMailRequest;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -11,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
  * Реализация сервиса отправки сообщения.
  */
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MailApiService implements MailService {
@@ -20,14 +18,15 @@ public class MailApiService implements MailService {
     private String url;
 
     @Override
-    public void createMessage(String email, String subject, String text) {
-        MailResponse mailResponse = new MailResponse(email, subject, text);
-        dispatchMessage(mailResponse);
+    public boolean createMessage(String email, String subject, String text) {
+        CreateMailRequest createMailRequest = new CreateMailRequest(email, subject, text);
+        return dispatchMessage(createMailRequest);
     }
 
     @Override
-    public void dispatchMessage(MailResponse mailResponse) {
+    public boolean dispatchMessage(CreateMailRequest createMailRequest) {
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.postForObject(url, mailResponse, MailResponse.class);
+        restTemplate.postForObject(url, createMailRequest, CreateMailRequest.class);
+        return true;
     }
 }

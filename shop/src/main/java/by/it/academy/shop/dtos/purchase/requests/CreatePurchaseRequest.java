@@ -9,14 +9,14 @@ import javax.validation.constraints.Pattern;
 import java.util.UUID;
 
 /**
- * Обработка запроса по добавлению покупки.
+ * Запрос по добавлению покупки.
  * Присутствует валидация по полям.
  */
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AddPurchaseRequest {
+public class CreatePurchaseRequest {
 
     @NotNull
     private UUID userId;

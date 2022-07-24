@@ -1,8 +1,8 @@
 package by.it.academy.shop.services.product;
 
-import by.it.academy.shop.dtos.product.requests.AddProductRequest;
-import by.it.academy.shop.dtos.product.requests.IdProductRequest;
-import by.it.academy.shop.dtos.product.requests.ShowProductRequest;
+import by.it.academy.shop.dtos.product.requests.CreateProductRequest;
+import by.it.academy.shop.dtos.product.requests.ProductRequest;
+import by.it.academy.shop.dtos.product.requests.ListProductRequest;
 import by.it.academy.shop.dtos.product.requests.UpdateProductRequest;
 import by.it.academy.shop.entities.product.Product;
 
@@ -16,17 +16,17 @@ public interface ProductService {
     /**
      * Добавление нового продукта
      */
-    Product addProduct(AddProductRequest addProductRequests);
+    Product addProduct(CreateProductRequest addProductRequests);
 
     /**
      * Нахождение списка продуктов соответствующий выборам пользователя
      */
-    List<Product> showProduct(ShowProductRequest showProductRequests);
+    List<Product> showProduct(ListProductRequest showProductRequests);
 
     /**
      * Нахождение продукта по Id
      */
-    Product showProductById(IdProductRequest idProductRequest);
+    Product showProductById(ProductRequest idProductRequest);
 
     /**
      * Обновление продукта
@@ -36,5 +36,5 @@ public interface ProductService {
     /**
      * Удаление продукта по Id
      */
-    boolean clearStockProduct(IdProductRequest idProductRequest);
+    boolean clearQuantityProduct(ProductRequest idProductRequest);
 }
