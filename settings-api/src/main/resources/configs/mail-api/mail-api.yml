@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: mail-api
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.Oracle12cDialect
+    show-sql: true
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: sys as sysdba
+    password: 1234
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+
+services:
+  mail:
+    email: test871150@mail.ru
+    password: X5eU281MFhjua008X6iN
+    url: http://localhost:8080/mail
