@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * Контроллер обработки отправляемых email сообщений.
- * Метод getDispatchStatus прослушивает адресс /dispatch-status
+ * Метод getStatusMail прослушивает адресс /mail
  * и логирует поступающий ответ о статусе отправки сообщения.
  */
 
 @Slf4j
 @RestController
+@RequestMapping("/mail")
 @RequiredArgsConstructor
 public class MailController {
 
-    @RequestMapping(value = "/dispatch-status")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
-    public void getDispatchStatus(@RequestBody @Validated MailRequest mailRequest) {
-        log.info("Message was sent: " + mailRequest.isMessageDispatchStatus());
+    @ResponseStatus(HttpStatus.OK)
+    public void getStatusMail(@RequestBody @Validated MailRequest mailRequest) {
+        log.info("Response received after sending a message: {}", mailRequest.isStatusMail());
     }
 }

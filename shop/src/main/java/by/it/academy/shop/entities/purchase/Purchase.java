@@ -17,7 +17,7 @@ import java.util.UUID;
  */
 
 @Entity
-@Table(name = "PURCHASE_4")
+@Table(name = "purchase")
 @Data
 @Builder
 @NoArgsConstructor
@@ -29,11 +29,11 @@ public class Purchase {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "USER_ID")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "Product_id")
+    @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 
     @Column(name = "PRODUCT_QUANTITY")

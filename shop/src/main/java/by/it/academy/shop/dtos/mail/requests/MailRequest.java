@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotNull;
 
 /**
- * Обработка ответа по отправке сообщения.
+ * Запрос по статусу сообщения.
  * Присутствует валидация по полю.
  */
 
@@ -17,5 +17,5 @@ import javax.validation.constraints.NotNull;
 public class MailRequest {
 
     @NotNull
-    private boolean messageDispatchStatus;
+    private boolean statusMail;
 }

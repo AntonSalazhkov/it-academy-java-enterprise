@@ -1,4 +1,4 @@
-package by.it.academy.shop.util.annotation;
+package by.it.academy.shop.aop;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,10 +6,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Аннотация установки UUID пользователю
+ * Аннотация исключения логирования данных работы метода.
  */
 
-@Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface SetUUID {
+@Target(ElementType.METHOD)
+public @interface ExcludeLog {
 }

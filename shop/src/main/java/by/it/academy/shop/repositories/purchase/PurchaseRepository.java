@@ -8,8 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Методы соединения с базой данных.
- * Обработка сущности Purchase.
+ * Методы обработки сущности Purchase.
  */
 
 public interface PurchaseRepository extends JpaRepository<Purchase, UUID> {

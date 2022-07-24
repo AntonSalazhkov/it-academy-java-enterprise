@@ -17,12 +17,12 @@ import java.util.UUID;
 
 /**
  * Контроллер обработки пользователя.
- * Метод authorizationUser прослушивает адресс /authorization, в случае наличия параметров "login" и "password" производится
+ * Метод authorizationUser прослушивает адресс /user/authorization, в случае наличия параметров "login" и "password" производится
  * их проверка на соответствие имеющимся в базе данных данным пользователей.
  * При совпадении данных параметров вернет полученного пользователя, при не совпадении каких-либо параметров вернет
  * сообщение о не корректности введенных данных авторипзации.
  * <p>
- * Метод registrationUser прослушивает адресс /registration, в случае наличия параметров "login", "email" и "password" производится
+ * Метод registrationUser прослушивает адресс /user/registration, в случае наличия параметров "login", "email" и "password" производится
  * их проверка на соответствие корректности ввода (по паттерну), а также уникальность "login" к имеющимся в базе данных.
  * При корректном вводе добавит пользователя в базу данных и вернет его на страницу, при не коректных данных вернет сообщение
  * о некорректном вводе данных или сообщение о нарушении уникальности логина.
@@ -39,9 +39,9 @@ public class UserController {
 
     @RequestMapping("/authorization")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public UUID authorizationUser(@RequestBody @Validated AuthorizationUserRequest authorizationUserRequest) {
-        User user =  userService.authorizationUser(authorizationUserRequest);
+        User user = userService.authorizationUser(authorizationUserRequest);
         return user.getId();
     }
 
@@ -51,7 +51,9 @@ public class UserController {
     public UUID registrationUser(@RequestBody @Validated RegistrationUserRequest registrationUserRequest) {
         User user = userService.addUser(registrationUserRequest);
 
-        mailApiService.createMessage(user.getEmail(), Messages.SUBJECT_EMAIL_MESSAGE, Messages.TEXT_EMAIL_MESSAGE);
+        boolean message = mailApiService.createMessage(user.getEmail(), Messages.SUBJECT_EMAIL_MESSAGE, Messages.TEXT_EMAIL_MESSAGE);
+        log.info("Forming a request to send a message {}", message);
+
         return user.getId();
     }
 }

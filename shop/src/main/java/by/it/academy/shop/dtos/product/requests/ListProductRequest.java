@@ -10,14 +10,14 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 /**
- * Обработка запроса по отображению продуктов.
+ * Запрос по отображению продуктов.
  * В поступающем запросе могут быть или не быть устанавливаемые пользователем параметры.
  */
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShowProductRequest {
+public class ListProductRequest {
 
     private List<ProductCategory> productCategories;
     private List<ProductType> productTypes;

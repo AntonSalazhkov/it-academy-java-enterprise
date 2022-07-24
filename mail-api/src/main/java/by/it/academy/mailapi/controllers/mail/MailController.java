@@ -19,14 +19,13 @@ import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @RestController
+@RequestMapping("/mail")
 @RequiredArgsConstructor
 public class MailController {
 
     private final MailService mailService;
 
-    @RequestMapping("/send-message")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseStatus(HttpStatus.CREATED)
     public void sendMessage(@RequestBody @Validated MailRequest mailRequest) {
         log.info("Received MailRequest by \"/send-message\": " + mailRequest.toString());
 

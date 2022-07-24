@@ -7,7 +7,7 @@ import by.it.academy.shop.exception.businessExceptions.UniqueLoginUserException;
 import by.it.academy.shop.services.user.UserAuthenticationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mindrot.jbcrypt.BCrypt;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -37,7 +37,7 @@ public class UserAuthenticationServiceTest {
         users.add(user2);
     }
 
-    @RepeatedTest(3)
+    @Test
     @DisplayName("Authorization user test")
     void authorizationUserTest() {
         UserAuthenticationService userAuthenticationService = new UserAuthenticationService();
@@ -49,7 +49,7 @@ public class UserAuthenticationServiceTest {
                 .authorizationUser(users, "admin", ""));
     }
 
-    @RepeatedTest(3)
+    @Test
     @DisplayName("Registration user test")
     void registrationUserTest() {
         UserAuthenticationService userAuthenticationService = new UserAuthenticationService();

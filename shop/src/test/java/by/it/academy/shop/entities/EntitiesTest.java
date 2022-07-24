@@ -38,7 +38,7 @@ public class EntitiesTest {
         assertNull(p1.getProductDetails());
         assertNull(p1.getSizeClothes());
         assertEquals(0, p1.getPrice());
-        assertEquals(0, p1.getInStock());
+        assertEquals(0, p1.getQuantity());
 
         assertEquals(uuid, p2.getId());
         assertEquals("img/product9.jpg", p2.getImagePath());
@@ -49,7 +49,7 @@ public class EntitiesTest {
         assertEquals("Good denim coat 2022", p2.getProductDetails());
         assertEquals("L, X, XL", p2.getSizeClothes());
         assertEquals(12, p2.getPrice());
-        assertEquals(1, p2.getInStock());
+        assertEquals(1, p2.getQuantity());
     }
 
     @Test
