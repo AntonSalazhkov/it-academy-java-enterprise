@@ -1,7 +1,6 @@
 package by.it.academy.shop.services;
 
 import by.it.academy.shop.dtos.product.requests.CreateProductRequest;
-import by.it.academy.shop.dtos.product.requests.ProductRequest;
 import by.it.academy.shop.dtos.product.requests.ListProductRequest;
 import by.it.academy.shop.dtos.product.requests.UpdateProductRequest;
 import by.it.academy.shop.entities.product.Product;
@@ -60,9 +59,9 @@ public class ProductServiceTest {
     @Test
     @DisplayName("Add product test")
     void addProductTest() {
-
-        CreateProductRequest addProductRequest = new CreateProductRequest("img/product9.jpg", "coat", ProductCategory.MEN,
-                ProductType.COAT, ProductColour.GREEN, "Good denim coat 2022", "L, X, XL", "12", "1");
+        CreateProductRequest addProductRequest = new CreateProductRequest("img/product9.jpg", "coat",
+                ProductCategory.MEN, ProductType.COAT, ProductColour.GREEN, "Good denim coat 2022",
+                "L, X, XL", "12", "1");
 
         when(productRepository.save(product1)).thenReturn(product1);
 
@@ -72,11 +71,9 @@ public class ProductServiceTest {
     @Test
     @DisplayName("Show product by id test")
     void showProductByIdTest() {
-        ProductRequest idProductRequest = new ProductRequest(uuid);
+        doReturn(Optional.ofNullable(product1)).when(productRepository).findById(uuid);
 
-        doReturn(Optional.ofNullable(product1)).when(productRepository).findById(idProductRequest.getId());
-
-        assertEquals(product1, productApiService.showProductById(idProductRequest));
+        assertEquals(product1, productApiService.showProductById(uuid));
     }
 
     @Test
@@ -89,7 +86,8 @@ public class ProductServiceTest {
 
         ListProductRequest showProductRequest = new ListProductRequest(productCategories, productTypes, productColours,
                 userInputProductName);
-        ListProductRequest showProductRequest2 = new ListProductRequest(new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), "123");
+        ListProductRequest showProductRequest2 = new ListProductRequest(new ArrayList<>(), new ArrayList<>(),
+                new ArrayList<>(), "123");
 
         doReturn(products).when(productRepository).findAll();
         doReturn(products).when(productRepository).getByProductCategory(ProductCategory.MEN);
@@ -120,14 +118,13 @@ public class ProductServiceTest {
     @Test
     @DisplayName("Clear stock product test")
     void clearStockProductTest() {
-        ProductRequest idProductRequest = new ProductRequest(uuid);
-        ProductRequest idProductRequest2 = new ProductRequest();
+        UUID uuid2 = UUID.randomUUID();
 
-        doReturn(Optional.of(product2)).when(productRepository).findById(idProductRequest.getId());
+        doReturn(Optional.of(product2)).when(productRepository).findById(uuid);
         product2.setQuantity(0);
         doReturn(product2).when(productRepository).save(product2);
 
-        assertTrue(productApiService.clearQuantityProduct(idProductRequest));
-        assertThrows(EntityNotFoundException.class, () -> productApiService.clearQuantityProduct(idProductRequest2));
+        assertTrue(productApiService.clearQuantityProduct(uuid));
+        assertThrows(EntityNotFoundException.class, () -> productApiService.clearQuantityProduct(uuid2));
     }
 }

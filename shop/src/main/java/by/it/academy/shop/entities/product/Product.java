@@ -9,12 +9,12 @@ import javax.persistence.*;
 import java.util.UUID;
 
 /**
- * Сущность Product, записываемая в базу данных как таблица PRODUCT.
+ * Сущность Product, записываемая в базу данных как таблица PRODUCTS.
  * Имеет enum поля productCategory, productType и productColour.
  */
 
 @Entity
-@Table(name = "products")
+@Table(name = "product")
 @Data
 @Builder
 @NoArgsConstructor

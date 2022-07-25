@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * Контроллер обработки отправляемых email сообщений.
- * Метод getStatusMail прослушивает адресс /mail
- * и логирует поступающий ответ о статусе отправки сообщения.
  */
 
 @Slf4j
@@ -20,6 +18,9 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class MailController {
 
+    /**
+     * Метод getStatusMail прослушивает адресс /mail и логирует поступающий ответ о статусе отправки сообщения.
+     */
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public void getStatusMail(@RequestBody @Validated MailRequest mailRequest) {

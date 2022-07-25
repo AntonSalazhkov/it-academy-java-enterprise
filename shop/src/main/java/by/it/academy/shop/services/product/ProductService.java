@@ -1,12 +1,12 @@
 package by.it.academy.shop.services.product;
 
 import by.it.academy.shop.dtos.product.requests.CreateProductRequest;
-import by.it.academy.shop.dtos.product.requests.ProductRequest;
 import by.it.academy.shop.dtos.product.requests.ListProductRequest;
 import by.it.academy.shop.dtos.product.requests.UpdateProductRequest;
 import by.it.academy.shop.entities.product.Product;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Сервис обработки продукта.
@@ -26,7 +26,7 @@ public interface ProductService {
     /**
      * Нахождение продукта по Id
      */
-    Product showProductById(ProductRequest idProductRequest);
+    Product showProductById(UUID id);
 
     /**
      * Обновление продукта
@@ -36,5 +36,5 @@ public interface ProductService {
     /**
      * Удаление продукта по Id
      */
-    boolean clearQuantityProduct(ProductRequest idProductRequest);
+    boolean clearQuantityProduct(UUID id);
 }

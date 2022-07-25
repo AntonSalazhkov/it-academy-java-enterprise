@@ -16,5 +16,5 @@ public interface MailService {
     /**
      * Отправка сообщения о статусе обрабатываемого сообщения.
      */
-    void dispatchStatus(MailResponse mailResponse);
+    boolean dispatchStatus(MailResponse mailResponse);
 }
