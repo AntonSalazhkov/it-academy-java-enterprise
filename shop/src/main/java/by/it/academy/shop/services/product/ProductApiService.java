@@ -1,7 +1,6 @@
 package by.it.academy.shop.services.product;
 
 import by.it.academy.shop.dtos.product.requests.CreateProductRequest;
-import by.it.academy.shop.dtos.product.requests.ProductRequest;
 import by.it.academy.shop.dtos.product.requests.ListProductRequest;
 import by.it.academy.shop.dtos.product.requests.UpdateProductRequest;
 import by.it.academy.shop.entities.product.Product;
@@ -34,8 +33,8 @@ public class ProductApiService implements ProductService {
     }
 
     @Override
-    public Product showProductById(ProductRequest idProductRequest) {
-        return productRepository.findById(idProductRequest.getId()).orElseThrow(EntityNotFoundException::new);
+    public Product showProductById(UUID id) {
+        return productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
     }
 
     @Override
@@ -55,8 +54,8 @@ public class ProductApiService implements ProductService {
 
     @Transactional
     @Override
-    public boolean clearQuantityProduct(ProductRequest idProductRequest) {
-        Product product = productRepository.findById(idProductRequest.getId()).orElseThrow(EntityNotFoundException::new);
+    public boolean clearQuantityProduct(UUID id) {
+        Product product = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         product.setQuantity(0);
         productRepository.save(product);
         return true;

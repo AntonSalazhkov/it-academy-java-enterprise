@@ -1,8 +1,6 @@
 package by.it.academy.shop.services.purchase;
 
 import by.it.academy.shop.dtos.purchase.requests.CreatePurchaseRequest;
-import by.it.academy.shop.dtos.purchase.requests.PurchaseRequest;
-import by.it.academy.shop.dtos.purchase.requests.UserPurchaseRequest;
 import by.it.academy.shop.entities.product.Product;
 import by.it.academy.shop.entities.purchase.Purchase;
 import by.it.academy.shop.entities.purchase.PurchaseStatus;
@@ -18,6 +16,7 @@ import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Реализация сервиса обработки покупок.
@@ -34,15 +33,15 @@ public class PurchaseApiService implements PurchaseService {
 
     @Transactional
     @Override
-    public Purchase addPurchase(CreatePurchaseRequest addPurchaseRequest) {
-        Purchase purchase = buildPurchase(addPurchaseRequest);
+    public Purchase addPurchase(CreatePurchaseRequest createPurchaseRequest) {
+        Purchase purchase = buildPurchase(createPurchaseRequest);
         return purchaseRepository.save(purchase);
     }
 
     @Override
-    public List<Purchase> showUserPurchase(UserPurchaseRequest showUserPurchaseRequest) {
+    public List<Purchase> showUserPurchase(UUID id) {
         List<Purchase> purchases = purchaseRepository
-                .getByUserIdAndPurchaseStatus(showUserPurchaseRequest.getUserId(), PurchaseStatus.PROCESSING);
+                .getByUserIdAndPurchaseStatus(id, PurchaseStatus.PROCESSING);
         if (!purchases.isEmpty()) {
             return purchases;
         } else {
@@ -52,8 +51,8 @@ public class PurchaseApiService implements PurchaseService {
 
     @Transactional
     @Override
-    public boolean makePurchase(PurchaseRequest idPurchaseRequest) {
-        Purchase purchase = purchaseRepository.findById(idPurchaseRequest.getId()).orElseThrow(EntityNotFoundException::new);
+    public boolean makePurchase(UUID id) {
+        Purchase purchase = purchaseRepository.findById(id).orElseThrow(EntityNotFoundException::new);
         int productQuantity = purchase.getProductQuantity();
 
         Product product = productRepository.findById(purchase.getProduct().getId()).orElseThrow(EntityNotFoundException::new);
