@@ -63,8 +63,10 @@ public class UserControllerTest {
     void registrationUserTest() throws Exception {
         UUID uuid = UUID.randomUUID();
         User user = new User(uuid, "admin", "1234@gmail.com", "1234zxcv", UserType.ADMIN);
-        RegistrationUserRequest registrationUserRequest = new RegistrationUserRequest("admin", "1234@gmail.com", "1234zxcv");
-        CreateMailRequest createMailRequest = new CreateMailRequest("1234@gmail.com", Messages.SUBJECT_EMAIL_MESSAGE, Messages.TEXT_EMAIL_MESSAGE);
+        RegistrationUserRequest registrationUserRequest = new RegistrationUserRequest("admin", "1234@gmail.com",
+                "1234zxcv");
+        CreateMailRequest createMailRequest = new CreateMailRequest("1234@gmail.com", Messages.SUBJECT_EMAIL_MESSAGE,
+                Messages.TEXT_EMAIL_MESSAGE);
 
         when(userService.addUser(registrationUserRequest)).thenReturn(user);
         when(mailApiService.dispatchMessage(createMailRequest)).thenReturn(true);

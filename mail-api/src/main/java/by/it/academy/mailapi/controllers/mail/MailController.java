@@ -5,16 +5,12 @@ import by.it.academy.mailapi.dtos.mail.responses.MailResponse;
 import by.it.academy.mailapi.services.mail.MailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 /**
- * Контроллер обработки отправки сообщений .
- * Метод sendMessage прослушивает адресс /send-message, в случае корректности поступивших данных,
- * отправит сообщение по указанному адресу, с соответствующим заголовком и сообщением. Вернет булево выражение.
+ * Контроллер обработки отправки сообщений.
  */
 
 @Slf4j
@@ -25,6 +21,10 @@ public class MailController {
 
     private final MailService mailService;
 
+    /**
+     * Метод sendMessage прослушивает адресс /mail, в случае корректности поступивших данных,
+     * отправит сообщение по указанному адресу, с соответствующим заголовком и сообщением. Вернет булево выражение.
+     */
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public void sendMessage(@RequestBody @Validated MailRequest mailRequest) {
         log.info("Received MailRequest by \"/send-message\": " + mailRequest.toString());

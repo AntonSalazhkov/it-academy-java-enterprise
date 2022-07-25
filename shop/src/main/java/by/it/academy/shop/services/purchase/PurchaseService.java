@@ -1,11 +1,10 @@
 package by.it.academy.shop.services.purchase;
 
 import by.it.academy.shop.dtos.purchase.requests.CreatePurchaseRequest;
-import by.it.academy.shop.dtos.purchase.requests.PurchaseRequest;
-import by.it.academy.shop.dtos.purchase.requests.UserPurchaseRequest;
 import by.it.academy.shop.entities.purchase.Purchase;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Сервис обработки покупки.
@@ -21,10 +20,10 @@ public interface PurchaseService {
     /**
      * Просмотр покупки пользователем
      */
-    List<Purchase> showUserPurchase(UserPurchaseRequest showUserPurchaseRequest);
+    List<Purchase> showUserPurchase(UUID id);
 
     /**
      * Совершение покупки (списание продукта и установка нового статуса покупки)
      */
-    boolean makePurchase(PurchaseRequest idPurchaseRequest);
+    boolean makePurchase(UUID id);
 }

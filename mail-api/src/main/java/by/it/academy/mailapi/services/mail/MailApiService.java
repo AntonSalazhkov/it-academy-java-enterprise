@@ -5,17 +5,10 @@ import by.it.academy.mailapi.dtos.mail.requests.MailRequest;
 import by.it.academy.mailapi.dtos.mail.responses.MailResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
@@ -32,11 +25,12 @@ public class MailApiService implements MailService {
     private final MailConfiguration mailConfiguration;
 
     @Override
-    public void dispatchStatus(MailResponse mailResponse) {
+    public boolean dispatchStatus(MailResponse mailResponse) {
         String url = mailConfiguration.getUrl();
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.postForObject(url, mailResponse, MailResponse.class);
+        return true;
     }
 
     @Override

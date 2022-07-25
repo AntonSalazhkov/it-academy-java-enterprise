@@ -11,13 +11,13 @@ import javax.persistence.*;
 import java.util.UUID;
 
 /**
- * Сущность Purchase, записываемая в базу данных как таблица PURCHASE.
+ * Сущность Purchase, записываемая в базу данных как таблица PURCHASES.
  * В сущности имеются отношения @ManyToOne к User и аналогичное отношение @ManyToOne к Product.
  * Поле localDate устанавливается в соответствующем формате при создании сущности.
  */
 
 @Entity
-@Table(name = "purchase")
+@Table(name = "purchases")
 @Data
 @Builder
 @NoArgsConstructor

@@ -16,16 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 /**
- * Контроллер обработки пользователя.
- * Метод authorizationUser прослушивает адресс /user/authorization, в случае наличия параметров "login" и "password" производится
- * их проверка на соответствие имеющимся в базе данных данным пользователей.
- * При совпадении данных параметров вернет полученного пользователя, при не совпадении каких-либо параметров вернет
- * сообщение о не корректности введенных данных авторипзации.
- * <p>
- * Метод registrationUser прослушивает адресс /user/registration, в случае наличия параметров "login", "email" и "password" производится
- * их проверка на соответствие корректности ввода (по паттерну), а также уникальность "login" к имеющимся в базе данных.
- * При корректном вводе добавит пользователя в базу данных и вернет его на страницу, при не коректных данных вернет сообщение
- * о некорректном вводе данных или сообщение о нарушении уникальности логина.
+ * Контроллер обработки запросов пользователя.
  */
 
 @Slf4j
@@ -37,6 +28,12 @@ public class UserController {
     private final UserService userService;
     private final MailApiService mailApiService;
 
+    /**
+     * Метод authorizationUser прослушивает адресс /user/authorization, в случае наличия параметров "login" и "password"
+     * производится их проверка на соответствие имеющимся в базе данных данным пользователей.
+     * При совпадении данных параметров вернет полученного пользователя, при не совпадении каких-либо параметров вернет
+     * сообщение о не корректности введенных данных авторипзации.
+     */
     @RequestMapping("/authorization")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.ACCEPTED)
@@ -45,6 +42,12 @@ public class UserController {
         return user.getId();
     }
 
+    /**
+     * Метод registrationUser прослушивает адресс /user/registration, в случае наличия параметров "login", "email" и "password"
+     * производится их проверка на соответствие корректности ввода (по паттерну), а также уникальность "login" к имеющимся
+     * в базе данных. При корректном вводе добавит пользователя в базу данных и вернет его на страницу, при не коректных
+     * данных вернет сообщение о некорректном вводе данных или сообщение о нарушении уникальности логина.
+     */
     @RequestMapping("/registration")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
