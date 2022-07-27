@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
 /**
- * Контроллер обработки логирования данных.
+ * Логирование данных контроллеров.
  */
 
 @Slf4j

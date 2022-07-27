@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 /**
- * Сервис логирования данных.
+ * Логирование данных сервисов.
  */
 
 @Slf4j
