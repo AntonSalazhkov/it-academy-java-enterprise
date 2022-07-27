@@ -5,7 +5,6 @@ import by.it.academy.shop.entities.purchase.Purchase;
 import by.it.academy.shop.services.purchase.PurchaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +27,7 @@ public class PurchaseController {
      * покупку в базу дынных. По результатам добавления вернет новую покупку или вернет null в случае не успешного добавления.
      */
     @RequestMapping("/create")
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Purchase addPurchase(@RequestBody @Validated CreatePurchaseRequest createPurchaseRequest) {
         return purchaseService.addPurchase(createPurchaseRequest);
@@ -40,7 +39,7 @@ public class PurchaseController {
      * пользователя покупки или сообщение о не нахождении у пользователя созданных покупок.
      */
     @RequestMapping("/basket/{id}")
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public List<Purchase> viewUserPurchase(@PathVariable UUID id) {
         return purchaseService.showUserPurchase(id);
     }
@@ -52,7 +51,7 @@ public class PurchaseController {
      * false в случае не успешной транзакции, или в случае если количества продуктов в покупке превышает количество продуктов на складе.
      */
     @RequestMapping("/{id}")
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping
     public boolean makePurchase(@PathVariable UUID id) {
         return purchaseService.makePurchase(id);
     }

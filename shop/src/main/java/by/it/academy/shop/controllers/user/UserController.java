@@ -9,7 +9,6 @@ import by.it.academy.shop.services.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +34,7 @@ public class UserController {
      * сообщение о не корректности введенных данных авторипзации.
      */
     @RequestMapping("/authorization")
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
     public UUID authorizationUser(@RequestBody @Validated AuthorizationUserRequest authorizationUserRequest) {
         User user = userService.authorizationUser(authorizationUserRequest);
@@ -49,7 +48,7 @@ public class UserController {
      * данных вернет сообщение о некорректном вводе данных или сообщение о нарушении уникальности логина.
      */
     @RequestMapping("/registration")
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public UUID registrationUser(@RequestBody @Validated RegistrationUserRequest registrationUserRequest) {
         User user = userService.addUser(registrationUserRequest);

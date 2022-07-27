@@ -7,7 +7,6 @@ import by.it.academy.shop.entities.product.Product;
 import by.it.academy.shop.services.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +33,7 @@ public class ProductController {
      * продуктов по заданному запросу.
      */
     @RequestMapping("/catalog")
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public List<Product> showProducts(@RequestBody ListProductRequest showProductRequests) {
         return productService.showProduct(showProductRequests);
     }
@@ -45,7 +44,7 @@ public class ProductController {
      * По результатам поиска вернет искомый продукт или вернет сообщение об не найденном объекте в случае не успешного поиска.
      */
     @RequestMapping("/details/{id}")
-    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping
     public Product showProductById(@PathVariable UUID id) {
         return productService.showProductById(id);
     }
@@ -56,7 +55,7 @@ public class ProductController {
      * введенных данных в случае не успешного добавления.
      */
     @RequestMapping("/admin/new-product")
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Product createProduct(@RequestBody @Validated CreateProductRequest createProductRequest) {
         return productService.addProduct(createProductRequest);
@@ -68,7 +67,7 @@ public class ProductController {
      * По результатам обновления вернет обновленный продукт или вернет сообщение об не найденном объекте в случае не корректного id.
      */
     @RequestMapping("/admin")
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping
     public Product updateProduct(@RequestBody @Validated UpdateProductRequest updateProductRequest) {
         return productService.updateProduct(updateProductRequest);
     }
@@ -80,7 +79,7 @@ public class ProductController {
      * в случае не корректного id.
      */
     @RequestMapping("/admin/no-product/{id}")
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping
     public boolean updateQuantityProduct(@PathVariable UUID id) {
         return productService.clearQuantityProduct(id);
     }
